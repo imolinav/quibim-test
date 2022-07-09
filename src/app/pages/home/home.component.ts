@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   pageIndex = 1;
   pageCount!: number;
   loading: boolean = true;
-  listType: ListType = 'card';
+  listType: ListType = 'table';
 
   constructor(private apiService: ApiService) { }
 

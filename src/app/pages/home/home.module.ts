@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { ListComponent } from './list/list.component';
 import { CardComponent } from './list/card/card.component';
+import { TableComponent } from './list/table/table.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CardComponent } from './list/card/card.component';
     HomeComponent,
     PaginatorComponent,
     ListComponent,
-    CardComponent
+    CardComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
