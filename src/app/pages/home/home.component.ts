@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   getEventsByPage() {
-    this.displayedEvents =  this.allEvents.slice(10*(this.pageIndex - 1), (10*this.pageIndex) - 1);
+    this.displayedEvents =  this.allEvents.slice(10*(this.pageIndex - 1), (10*this.pageIndex));
     console.log(this.displayedEvents);
   }
 

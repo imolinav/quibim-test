@@ -1,5 +1,11 @@
 <ng-container *ngIf="listType === 'card'">
-
+    <div class="row">
+        <app-card
+            *ngFor="let event of events"
+            [event]="event"
+            class="col-6"
+        ></app-card>
+    </div>
 </ng-container>
 
 <ng-container *ngIf="listType === 'table'">

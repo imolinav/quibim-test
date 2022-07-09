@@ -1,0 +1,33 @@
+.card {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+    height: 100%;
+    &-header {
+        border-bottom: none;
+        background-color: white;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+    &-body {
+        flex: none;
+    }
+    &-links {
+        padding: 1rem 1rem;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+	position: relative;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 1.2em;
+}
+ul li:before {
+	content: "-";
+	position: absolute;
+	left: 0;
+}
