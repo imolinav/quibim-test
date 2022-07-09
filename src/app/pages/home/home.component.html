@@ -1,4 +1,8 @@
 <div class="container" *ngIf="!loading">
+    <app-list
+        [listType]="listType"
+        [events]="displayedEvents"
+    ></app-list>
     <app-paginator 
         [pageCount]="pageCount" 
         [pageIndex]="pageIndex"

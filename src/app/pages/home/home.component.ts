@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { History, HistoryData } from 'src/app/models/api/api.model';
 import { ApiService } from 'src/app/services/api/api.service';
+import { ListType } from './list/models/list.model';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   pageIndex = 1;
   pageCount!: number;
   loading: boolean = true;
+  listType: ListType = 'card';
 
   constructor(private apiService: ApiService) { }
 
