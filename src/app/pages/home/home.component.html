@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="container" *ngIf="!loading">
+    <app-paginator 
+        [pageCount]="pageCount" 
+        [pageIndex]="pageIndex"
+        (nextPage)="nextPageSelected()"
+        (previousPage)="previousPageSelected()"
+        (selectPage)="pageSelected($event)"
+    ></app-paginator>
+</div>

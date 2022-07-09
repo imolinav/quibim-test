@@ -1,0 +1,10 @@
+<div>
+    <button [disabled]="pageIndex === 1" (click)="handlePreviousPage()">-</button>
+    <button 
+        *ngFor="let _ of [].constructor(pageCount); let i=index"
+        [ngClass]="{ 'active-page': pageIndex === i }"
+        [disabled]="pageIndex === i+1"
+        (click)="handleSelectPage(i+1)"
+    >{{ i+1 }}</button>
+    <button [disabled]="pageIndex === pageCount" (click)="handleNextPage()">+</button>
+</div>
