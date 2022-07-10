@@ -30,4 +30,15 @@ export class PaginatorComponent implements OnInit {
     this.previousPage.emit();
   }
 
+  checkVisibility(index: number) {
+    if(index <= this.pageIndex + 1 && index >= this.pageIndex - 3) {
+      return true;
+    } else if(this.pageIndex <= 2 && index <=4) {
+      return true;
+    } else if(this.pageIndex >= this.pageCount - 2 && index >= this.pageCount - 5) {
+      return true;
+    }
+    return false;
+  }
+
 }
