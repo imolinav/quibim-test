@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { forkJoin, Observable, filter } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { History, HistoryData } from 'src/app/models/api/api.model';
 import { ApiService } from 'src/app/services/api/api.service';
 import { ListType } from './list/models/list.model';
+
+type FilteredTypes = { births: boolean, deaths: boolean, events: boolean };
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,6 @@ import { ListType } from './list/models/list.model';
 })
 export class HomeComponent implements OnInit {
   
-  history!: History;
   displayedEvents!: HistoryData[];
   allEvents!: HistoryData[];
   pageIndex = 1;
@@ -25,7 +26,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getTodayHistory().subscribe({
       next: (n) => {
-        this.history = n;
         this.allEvents = [...n.data.Events, ...n.data.Births, ...n.data.Deaths];
         this.getEventsByPage();
         this.loading = false;
@@ -40,39 +40,42 @@ export class HomeComponent implements OnInit {
   filterEvents(filterGroup: FormGroup) {
     const dateType = filterGroup.get('dateType')?.value;
     const date = new Date(filterGroup.get('date')?.value);
+    const filteredTypes = filterGroup.get('type')?.value;
+
     if(dateType === '1' || dateType === '2' || dateType === '4') {
       this.apiService.getTodayHistory().subscribe({
         next: (n) => {
-          this.history = n;
-          this.newEventHistory(filterGroup.get('type')?.value, dateType, date.getFullYear());
+          this.newEventHistory(n, filteredTypes, dateType, date.getFullYear());
         }
       });
     } else {
-      const d = new Date();
-      const month = d.getMonth();
-      const dayFrom = filterGroup.get('date')?.value[0].split(' ')[2];
-      const dayTo = filterGroup.get('date')?.value[1].split(' ')[2];
+      const today = new Date();
+      const dayFrom = new Date(filterGroup.get('date')?.value[0]);
+      const dayTo = new Date(filterGroup.get('date')?.value[1]);
+
       let eventsHistory$: Observable<History>[] = [];
-      for(let i = dayFrom; i <= dayTo; i++) {
-        eventsHistory$.push(this.apiService.getHistoryByDate(month, i))
+      for(let i = dayFrom.getDate(); i <= dayTo.getDate(); i++) {
+        eventsHistory$.push(this.apiService.getHistoryByDate(today.getMonth(), i))
       }
-      /* forkJoin(eventsHistory$).subscribe(res => {
-        console.log(res);
-      }); */
+      forkJoin(eventsHistory$).subscribe({
+        next: (n) => {
+          console.log(n);
+          this.newMultiEventsHistory(n, filteredTypes);
+        }
+      });
     }
-    
   }
 
-  newEventHistory(type: { births: boolean, deaths: boolean, events: boolean }, dateType: string, year: number) {
+  newEventHistory(history: History, type: FilteredTypes, dateType: string, year: number) {
     this.allEvents = [];
     if(type.births) {
-      this.allEvents.push(...this.history.data.Births);
+      this.allEvents.push(...history.data.Births);
     }
     if(type.deaths) {
-      this.allEvents.push(...this.history.data.Deaths);
+      this.allEvents.push(...history.data.Deaths);
     }
     if(type.events) {
-      this.allEvents.push(...this.history.data.Events);
+      this.allEvents.push(...history.data.Events);
     }
 
     if(dateType === '1') {
@@ -81,7 +84,22 @@ export class HomeComponent implements OnInit {
     if(dateType === '4') {
       this.allEvents = this.allEvents.filter(event => Number(event.year) >= year);
     }
+    this.getEventsByPage();
+  }
 
+  newMultiEventsHistory(history: History[], type: FilteredTypes) {
+    this.allEvents = [];
+    for(let day of history) {
+      if(type.births) {
+        this.allEvents.push(...day.data.Births);
+      }
+      if(type.deaths) {
+        this.allEvents.push(...day.data.Deaths);
+      }
+      if(type.events) {
+        this.allEvents.push(...day.data.Events);
+      }
+    }
     this.getEventsByPage();
   }
 
