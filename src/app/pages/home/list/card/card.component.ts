@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HistoryData } from 'src/app/models/api/api.model';
 
@@ -8,15 +8,11 @@ import { HistoryData } from 'src/app/models/api/api.model';
   styleUrls: ['./card.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
 
   @Input() event!: HistoryData;
 
   constructor(private sanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
-    console.log(this.event);
-  }
 
   getSanitizedHtml(htmlString: string) {
     return this.sanitizer.bypassSecurityTrustHtml(htmlString);

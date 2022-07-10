@@ -1,6 +1,11 @@
 <div class="container" *ngIf="!loading">
     <div class="row">
         <div class="col-12">
+            <app-filter
+                [displayType]="listType"
+                (displayTypeChanged)="changeDisplay($event)"
+                (eventsFiltered)="filterEvents($event)"
+            ></app-filter>
             <app-list
                 [listType]="listType"
                 [events]="displayedEvents"

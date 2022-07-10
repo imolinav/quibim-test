@@ -7,6 +7,10 @@ import { PaginatorComponent } from './paginator/paginator.component';
 import { ListComponent } from './list/list.component';
 import { CardComponent } from './list/card/card.component';
 import { TableComponent } from './list/table/table.component';
+import { FilterComponent } from './filter/filter.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 @NgModule({
@@ -15,11 +19,16 @@ import { TableComponent } from './list/table/table.component';
     PaginatorComponent,
     ListComponent,
     CardComponent,
-    TableComponent
+    TableComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NzDatePickerModule,
+    NzIconModule
   ]
 })
 export class HomeModule { }
