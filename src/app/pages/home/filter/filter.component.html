@@ -1,0 +1,43 @@
+<div class="filter">
+    <div class="filter-display">
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <input type="radio" class="btn-check" id="btncheckdisplay1" value="table" [(ngModel)]="displayType" (change)="changeDisplay()">
+            <label class="btn btn-outline-primary" for="btncheckdisplay1"><i nz-icon nzType="table" nzTheme="outline"></i></label>
+          
+            <input type="radio" class="btn-check" id="btncheckdisplay2" value="card" [(ngModel)]="displayType" (change)="changeDisplay()">
+            <label class="btn btn-outline-primary" for="btncheckdisplay2"><i nz-icon nzType="appstore" nzTheme="outline"></i></label>
+        </div>
+    </div>
+    <ng-container [formGroup]="filterForm">
+        <div class="filter-type">
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" formGroupName="type">
+                <input type="checkbox" class="btn-check" id="btncheck1" formControlName="events">
+                <label class="btn btn-outline-primary" for="btncheck1">Events</label>
+              
+                <input type="checkbox" class="btn-check" id="btncheck2" formControlName="births">
+                <label class="btn btn-outline-primary" for="btncheck2">Births</label>
+              
+                <input type="checkbox" class="btn-check" id="btncheck3" formControlName="deaths">
+                <label class="btn btn-outline-primary" for="btncheck3">Deaths</label>
+            </div>
+        </div>
+        <div class="filter-date">
+            <nz-date-picker nzMode="year" formControlName="date" *ngIf="dateType === 'year'"></nz-date-picker>
+            <nz-range-picker nzMode="date" formControlName="date"  *ngIf="dateType === 'range'"></nz-range-picker>
+    
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" value="1" id="btnradio1" formControlName="dateType">
+                <label class="btn btn-outline-primary" for="btnradio1">Previous to</label>
+              
+                <input type="radio" class="btn-check" value="2" id="btnradio2" formControlName="dateType">
+                <label class="btn btn-outline-primary" for="btnradio2">Today</label>
+              
+                <input type="radio" class="btn-check" value="3" id="btnradio3" formControlName="dateType">
+                <label class="btn btn-outline-primary" for="btnradio3">Between</label>
+                
+                <input type="radio" class="btn-check" value="4" id="btnradio4" formControlName="dateType">
+                <label class="btn btn-outline-primary" for="btnradio4">After</label>
+              </div>
+        </div>
+    </ng-container>
+</div>
