@@ -3,11 +3,15 @@
         <app-card
             *ngFor="let event of events"
             [event]="event"
+            (eventSelected)="returnEvent($event)"
             class="col-6"
         ></app-card>
     </div>
 </ng-container>
 
 <ng-container *ngIf="listType === 'table'">
-    <app-table [events]="events"></app-table>
+    <app-table 
+        [events]="events"
+        (eventSelected)="returnEvent($event)"
+    ></app-table>
 </ng-container>

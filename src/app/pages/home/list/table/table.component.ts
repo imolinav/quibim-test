@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HistoryData } from 'src/app/models/api/api.model';
 
 @Component({
@@ -9,10 +9,15 @@ import { HistoryData } from 'src/app/models/api/api.model';
 export class TableComponent implements OnInit {
 
   @Input() events!: HistoryData[];
+  @Output() eventSelected = new EventEmitter<HistoryData>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectEvent(event: HistoryData) {
+    this.eventSelected.emit(event);
   }
 
 }

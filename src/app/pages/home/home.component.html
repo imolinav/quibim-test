@@ -9,6 +9,7 @@
             <app-list
                 [listType]="listType"
                 [events]="displayedEvents"
+                (eventSelected)="handleEventSelected($event)"
             ></app-list>
             <app-paginator 
                 [pageCount]="pageCount" 

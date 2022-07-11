@@ -10,7 +10,7 @@
         <tr *ngFor="let event of events">
             <td>{{ event.year }}</td>
             <td>{{ event.text }}</td>
-            <td><i nz-icon nzType="eye" nzTheme="outline"></i></td>
+            <td><i nz-icon nzType="eye" nzTheme="outline" (click)="selectEvent(event)"></i></td>
         </tr>
     </tbody>
 </table>

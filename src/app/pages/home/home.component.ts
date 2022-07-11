@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { forkJoin, Observable } from 'rxjs';
 import { History, HistoryData } from 'src/app/models/api/api.model';
 import { ApiService } from 'src/app/services/api/api.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ListType } from './list/models/list.model';
+import { ModalComponent } from './modal/modal.component';
 
 type FilteredTypes = { births: boolean, deaths: boolean, events: boolean };
 
@@ -23,13 +25,13 @@ export class HomeComponent implements OnInit {
   listType: ListType = 'table';
   pageTitle!: string;
 
-  constructor(private apiService: ApiService, private loader: LoaderService) { }
+  constructor(private apiService: ApiService, private loader: LoaderService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loader.show();
     this.apiService.getTodayHistory().subscribe({
       next: (n) => {
-        
+
         this.allEvents = [...n.data.Events, ...n.data.Births, ...n.data.Deaths];
         this.getEventsByPage();
         this.loading = false;
@@ -129,6 +131,10 @@ export class HomeComponent implements OnInit {
   pageSelected(page: number) {
     this.pageIndex = page;
     this.getEventsByPage();
+  }
+
+  handleEventSelected(event: HistoryData) {
+    this.dialog.open(ModalComponent, { data: event });
   }
 
 }

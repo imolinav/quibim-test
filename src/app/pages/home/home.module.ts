@@ -8,9 +8,11 @@ import { ListComponent } from './list/list.component';
 import { CardComponent } from './list/card/card.component';
 import { TableComponent } from './list/table/table.component';
 import { FilterComponent } from './filter/filter.component';
+import { ModalComponent } from './modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     ListComponent,
     CardComponent,
     TableComponent,
-    FilterComponent
+    FilterComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     ReactiveFormsModule,
     FormsModule,
     NzDatePickerModule,
-    NzIconModule
+    NzIconModule,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

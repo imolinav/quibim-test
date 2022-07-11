@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ data.year }}</h1>
+<div mat-dialog-content>
+    <div [innerHtml]="data.html"></div>
+    <p>Links list:</p>
+  <ul>
+    <li *ngFor="let link of data.links">
+        <a [href]="link.link">{{ link.title }}</a>
+    </li>
+  </ul>
+</div>

@@ -1,7 +1,8 @@
 .card {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-
+    cursor: pointer;
     height: 100%;
+    transition: 0.25s ease-in-out;
     &-header {
         border-bottom: none;
         background-color: white;
@@ -13,6 +14,9 @@
     }
     &-links {
         padding: 1rem 1rem;
+    }
+    &:hover {
+        transform: scale(1.05);
     }
 }
 

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="selectEvent(event)">
     <div class="card-header">Year {{ event.year }}</div>
-    <div class="card-body" [innerHtml]="getSanitizedHtml(event.no_year_html)"></div>
+    <div class="card-body">{{ event.text }}</div>
 </div>
