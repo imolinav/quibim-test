@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.loader.show();
     this.apiService.getTodayHistory().subscribe({
       next: (n) => {
-
+        this.pageTitle = n.date;
         this.allEvents = [...n.data.Events, ...n.data.Births, ...n.data.Deaths];
         this.getEventsByPage();
         this.loading = false;
@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
     if(dateType === '1' || dateType === '2' || dateType === '4') {
       this.apiService.getTodayHistory().subscribe({
         next: (n) => {
+          this.pageTitle = n.date;
           this.newEventHistory(n, filteredTypes, dateType, date.getFullYear());
           this.loader.hide();
         }
@@ -68,6 +69,7 @@ export class HomeComponent implements OnInit {
       }
       forkJoin(eventsHistory$).subscribe({
         next: (n) => {
+          this.pageTitle = n[0].date + ' - ' + n[n.length - 1].date;
           this.newMultiEventsHistory(n, filteredTypes);
           this.loader.hide();
         }

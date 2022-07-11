@@ -6,6 +6,7 @@
                 (displayTypeChanged)="changeDisplay($event)"
                 (eventsFiltered)="filterEvents($event)"
             ></app-filter>
+            <h2>{{ pageTitle }}</h2>
             <app-list
                 [listType]="listType"
                 [events]="displayedEvents"
