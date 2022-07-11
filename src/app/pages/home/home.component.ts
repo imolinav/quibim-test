@@ -95,6 +95,7 @@ export class HomeComponent implements OnInit {
     if(dateType === '4') {
       this.allEvents = this.allEvents.filter(event => Number(event.year) >= year);
     }
+    this.pageIndex = 1;
     this.getEventsByPage();
   }
 
@@ -111,6 +112,7 @@ export class HomeComponent implements OnInit {
         this.allEvents.push(...day.data.Events);
       }
     }
+    this.pageIndex = 1;
     this.getEventsByPage();
   }
 
