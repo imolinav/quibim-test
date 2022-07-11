@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
 import { History, HistoryData } from 'src/app/models/api/api.model';
 import { ApiService } from 'src/app/services/api/api.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ListType } from './list/models/list.model';
 
 type FilteredTypes = { births: boolean, deaths: boolean, events: boolean };
@@ -20,15 +21,19 @@ export class HomeComponent implements OnInit {
   pageCount!: number;
   loading: boolean = true;
   listType: ListType = 'table';
+  pageTitle!: string;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private loader: LoaderService) { }
 
   ngOnInit(): void {
+    this.loader.show();
     this.apiService.getTodayHistory().subscribe({
       next: (n) => {
+        
         this.allEvents = [...n.data.Events, ...n.data.Births, ...n.data.Deaths];
         this.getEventsByPage();
         this.loading = false;
+        this.loader.hide();
       }
     });
   }
@@ -38,6 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   filterEvents(filterGroup: FormGroup) {
+    this.loader.show();
     const dateType = filterGroup.get('dateType')?.value;
     const date = new Date(filterGroup.get('date')?.value);
     const filteredTypes = filterGroup.get('type')?.value;
@@ -46,6 +52,7 @@ export class HomeComponent implements OnInit {
       this.apiService.getTodayHistory().subscribe({
         next: (n) => {
           this.newEventHistory(n, filteredTypes, dateType, date.getFullYear());
+          this.loader.hide();
         }
       });
     } else {
@@ -55,12 +62,12 @@ export class HomeComponent implements OnInit {
 
       let eventsHistory$: Observable<History>[] = [];
       for(let i = dayFrom.getDate(); i <= dayTo.getDate(); i++) {
-        eventsHistory$.push(this.apiService.getHistoryByDate(today.getMonth(), i))
+        eventsHistory$.push(this.apiService.getHistoryByDate(today.getMonth() + 1, i))
       }
       forkJoin(eventsHistory$).subscribe({
         next: (n) => {
-          console.log(n);
           this.newMultiEventsHistory(n, filteredTypes);
+          this.loader.hide();
         }
       });
     }

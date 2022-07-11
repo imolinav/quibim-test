@@ -1,4 +1,23 @@
 .filter {
+    &-display {
+        & i {
+            position: relative;
+            top: 50%;
+            transform: translate(0, -100%);
+        }
+    }
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
+    &-date {
+        display: flex;
+        & nz-date-picker, & nz-range-picker {
+            margin-right: 10px;
+            border: 1px solid #0d6efd;
+            padding: 0.4rem 0.75rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            line-height: 1.5;
+        }
+    }
 }

@@ -1,12 +1,23 @@
-<div>
-    <button [disabled]="pageIndex === 1" (click)="handlePreviousPage()">-</button>
+<div class="paginator">
+    <button 
+        class="paginator-button"
+        [disabled]="pageIndex === 1" 
+        (click)="handlePreviousPage()">
+        <i nz-icon nzType="left" nzTheme="outline"></i>
+    </button>
     <ng-container *ngFor="let _ of [].constructor(pageCount); let i=index">
         <button 
+            class="paginator-button"
             *ngIf="checkVisibility(i)"
-            [ngClass]="{ 'active-page': pageIndex === i }"
+            [ngClass]="{ 'paginator-button-active': pageIndex === i+1 }"
             [disabled]="pageIndex === i+1"
             (click)="handleSelectPage(i+1)"
         >{{ i+1 }}</button>
     </ng-container>
-    <button [disabled]="pageIndex === pageCount" (click)="handleNextPage()">+</button>
-</div>
+    <button 
+        class="paginator-button"
+        [disabled]="pageIndex === pageCount" 
+        (click)="handleNextPage()">
+        <i nz-icon nzType="right" nzTheme="outline"></i>
+    </button>
+</div> 
