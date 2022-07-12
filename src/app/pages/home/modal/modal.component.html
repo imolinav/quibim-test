@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ data.year }}</h1>
+<div class="dialog-title"><span>Year {{ data.year }}</span><app-chip [eventType]="data.eventType"></app-chip></div>
 <div mat-dialog-content>
     <div [innerHtml]="data.html"></div>
     <p>Links list:</p>

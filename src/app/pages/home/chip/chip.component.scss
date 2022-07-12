@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    font-size: 0.75rem;
+    width: fit-content;
+    height: fit-content;
+    padding: 1px 10px;
+    border-radius: 15px;
+    border: 2px solid;
+    &.chip {
+        &-event {
+            background-color: #7AB1D7;
+            border-color: #304e63
+        }
+        &-death {
+            background-color: #F87371;
+            border-color: #762524;
+        }
+        &-birth {
+            background-color: #CAECC2;
+            border-color: #57774f;
+        }
+    }
+}

@@ -32,7 +32,8 @@ export class HomeComponent implements OnInit {
     this.apiService.getTodayHistory().subscribe({
       next: (n) => {
         this.pageTitle = n.date;
-        this.allEvents = [...n.data.Events, ...n.data.Births, ...n.data.Deaths];
+        this.allEvents = [...n.data.Events.map(arr => ({ ...arr, eventType: 'event' })), ...n.data.Births.map(arr => ({ ...arr, eventType: 'birth' })), ...n.data.Deaths.map(arr => ({ ...arr, eventType: 'death' }))];
+        console.log(this.allEvents);
         this.getEventsByPage();
         this.loading = false;
         this.loader.hide();
@@ -80,13 +81,13 @@ export class HomeComponent implements OnInit {
   newEventHistory(history: History, type: FilteredTypes, dateType: string, year: number) {
     this.allEvents = [];
     if(type.births) {
-      this.allEvents.push(...history.data.Births);
+      this.allEvents.push(...history.data.Births.map(arr => ({ ...arr, eventType: 'birth' })));
     }
     if(type.deaths) {
-      this.allEvents.push(...history.data.Deaths);
+      this.allEvents.push(...history.data.Deaths.map(arr => ({ ...arr, eventType: 'death' })));
     }
     if(type.events) {
-      this.allEvents.push(...history.data.Events);
+      this.allEvents.push(...history.data.Events.map(arr => ({ ...arr, eventType: 'event' })));
     }
 
     if(dateType === '1') {
@@ -103,13 +104,13 @@ export class HomeComponent implements OnInit {
     this.allEvents = [];
     for(let day of history) {
       if(type.births) {
-        this.allEvents.push(...day.data.Births);
+        this.allEvents.push(...day.data.Births.map(arr => ({ ...arr, eventType: 'birth' })));
       }
       if(type.deaths) {
-        this.allEvents.push(...day.data.Deaths);
+        this.allEvents.push(...day.data.Deaths.map(arr => ({ ...arr, eventType: 'death' })));
       }
       if(type.events) {
-        this.allEvents.push(...day.data.Events);
+        this.allEvents.push(...day.data.Events.map(arr => ({ ...arr, eventType: 'event' })));
       }
     }
     this.pageIndex = 1;

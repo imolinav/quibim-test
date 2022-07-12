@@ -4,3 +4,10 @@ tbody {
         cursor: pointer;
     }
 }
+
+.table-content {
+    display: flex;
+    & span {
+        margin-left: 2rem;
+    }
+}

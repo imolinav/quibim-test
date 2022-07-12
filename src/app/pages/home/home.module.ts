@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ChipComponent } from './chip/chip.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CardComponent,
     TableComponent,
     FilterComponent,
-    ModalComponent
+    ModalComponent,
+    ChipComponent
   ],
   imports: [
     CommonModule,

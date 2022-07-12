@@ -1,4 +1,4 @@
 <div class="card" (click)="selectEvent(event)">
-    <div class="card-header">Year {{ event.year }}</div>
+    <div class="card-header">Year {{ event.year }}<app-chip [eventType]="event.eventType"></app-chip></div>
     <div class="card-body">{{ event.text }}</div>
 </div>

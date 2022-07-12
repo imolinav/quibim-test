@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Year</th>
+            <th>Type</th>
             <th>Text</th>
             <th></th>
         </tr>
@@ -9,6 +10,7 @@
     <tbody>
         <tr *ngFor="let event of events">
             <td>{{ event.year }}</td>
+            <td><app-chip [eventType]="event.eventType"></app-chip></td>
             <td>{{ event.text }}</td>
             <td><i nz-icon nzType="eye" nzTheme="outline" (click)="selectEvent(event)"></i></td>
         </tr>

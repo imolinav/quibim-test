@@ -13,7 +13,8 @@ export interface HistoryData {
     text: string;
     html: string;
     no_year_html: string;
-    links: HistoryLinks[]
+    links: HistoryLinks[];
+    eventType: string;
 }
 
 export interface HistoryLinks {
